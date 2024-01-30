@@ -42,7 +42,7 @@ public class Main {
 
     /**
      * Time Complexity: O(n*n)
-     * Space Complexity: O(n) (Considering space of method stack)
+     * Space Complexity: O(n) (Considering method stack space)
      */
     public static void bubbleSortRecursive(int[] arr, int n) {
         if (n == 1) return;
@@ -58,6 +58,10 @@ public class Main {
         bubbleSortRecursive(arr, n - 1);
     }
 
+    /**
+     * Time Complexity: O(n*n)
+     * Space Complexity: O(1)
+     */
     public static void insertionSort(int[] arr) {
         for (int i = 1; i < arr.length; i++) {
             int k = arr[i];
@@ -69,6 +73,24 @@ public class Main {
             arr[++j] = k;
         }
     }
+
+    /**
+     * Time Complexity: O(n*n)
+     * Space Complexity: O(n) (Considering method stack space)
+     */
+    public static void insertionSortRecursive(int[] arr, int idx) {
+        if (arr.length == idx) return;
+
+        int k = arr[idx];
+        int i = idx - 1;
+        while (i >= 0 && arr[i] > k) {
+            arr[i + 1] = arr[i];
+            i--;
+        }
+        arr[++i] = k;
+        insertionSortRecursive(arr, idx+1);
+    }
+
 
     public static void print(int[] arr) {
         for (int i : arr) {
@@ -84,7 +106,8 @@ public class Main {
 //        selectionSort(arr);
 //        bubbleSort(arr);
 //        bubbleSortRecursive(arr, arr.length);
-        insertionSort(arr);
+//        insertionSort(arr);
+        insertionSortRecursive(arr, 1);
         print(arr);
         Arrays.sort(orgArr);
         System.out.println("Is sorted: " + Arrays.equals(orgArr, arr));
