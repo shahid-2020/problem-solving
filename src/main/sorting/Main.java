@@ -58,6 +58,18 @@ public class Main {
         bubbleSortRecursive(arr, n - 1);
     }
 
+    public static void insertionSort(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            int k = arr[i];
+            int j = i - 1;
+            while (j >= 0 && arr[j] > k) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[++j] = k;
+        }
+    }
+
     public static void print(int[] arr) {
         for (int i : arr) {
             System.out.print(" " + i);
@@ -71,7 +83,8 @@ public class Main {
         print(arr);
 //        selectionSort(arr);
 //        bubbleSort(arr);
-        bubbleSortRecursive(arr, arr.length);
+//        bubbleSortRecursive(arr, arr.length);
+        insertionSort(arr);
         print(arr);
         Arrays.sort(orgArr);
         System.out.println("Is sorted: " + Arrays.equals(orgArr, arr));
