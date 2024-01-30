@@ -4,6 +4,10 @@ import java.util.Arrays;
 
 public class Main {
 
+    /**
+     * Time Complexity: O(n*n)
+     * Space Complexity: O(1)
+     */
     public static void selectionSort(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             int lstIdx = arr.length - i;
@@ -20,6 +24,10 @@ public class Main {
         }
     }
 
+    /**
+     * Time Complexity: O(n*n)
+     * Space Complexity: O(1)
+     */
     public static void bubbleSort(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             for (int j = 1; j < arr.length - i; j++) {
@@ -32,6 +40,10 @@ public class Main {
         }
     }
 
+    /**
+     * Time Complexity: O(n*n)
+     * Space Complexity: O(n) (Considering space of method stack)
+     */
     public static void bubbleSortRecursive(int[] arr, int n) {
         if (n == 1) return;
 
@@ -59,7 +71,7 @@ public class Main {
         print(arr);
 //        selectionSort(arr);
 //        bubbleSort(arr);
-//        bubbleSortRecursive(arr, arr.length);
+        bubbleSortRecursive(arr, arr.length);
         print(arr);
         Arrays.sort(orgArr);
         System.out.println("Is sorted: " + Arrays.equals(orgArr, arr));
