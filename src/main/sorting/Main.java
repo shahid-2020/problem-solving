@@ -32,6 +32,20 @@ public class Main {
         }
     }
 
+    public static void bubbleSortRecursive(int[] arr, int n) {
+        if (n == 1) return;
+
+        for (int i = 1; i < n; i++) {
+            if (arr[i - 1] > arr[i]) {
+                int temp = arr[i - 1];
+                arr[i - 1] = arr[i];
+                arr[i] = temp;
+            }
+        }
+
+        bubbleSortRecursive(arr, n - 1);
+    }
+
     public static void print(int[] arr) {
         for (int i : arr) {
             System.out.print(" " + i);
@@ -44,7 +58,8 @@ public class Main {
         int[] arr = Arrays.copyOf(orgArr, orgArr.length);
         print(arr);
 //        selectionSort(arr);
-        bubbleSort(arr);
+//        bubbleSort(arr);
+//        bubbleSortRecursive(arr, arr.length);
         print(arr);
         Arrays.sort(orgArr);
         System.out.println("Is sorted: " + Arrays.equals(orgArr, arr));
