@@ -88,27 +88,59 @@ public class Main {
             i--;
         }
         arr[++i] = k;
-        insertionSortRecursive(arr, idx+1);
+        insertionSortRecursive(arr, idx + 1);
     }
 
+    /**
+     * Time Complexity: O(n * Log n)
+     * Space Complexity: O(n)
+     */
+    public static void mergeSort(int[] arr, int l, int h) {
+        if (l == h) return;
 
-    public static void print(int[] arr) {
-        for (int i : arr) {
-            System.out.print(" " + i);
+        int m = l + ((h - l) / 2);
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, h);
+        merge(arr, l, m, h);
+    }
+
+    public static void merge(int[] arr, int l, int m, int h) {
+        int[] tArr = new int[(h - l) + 1];
+        int l1 = l;
+        int l2 = m + 1;
+        int i = 0;
+        while (l1 <= m && l2 <= h) {
+            if (arr[l1] < arr[l2]) {
+                tArr[i++] = arr[l1++];
+            } else {
+                tArr[i++] = arr[l2++];
+            }
         }
-        System.out.println();
+
+        while (l1 <= m) {
+            tArr[i++] = arr[l1++];
+        }
+
+        while (l2 <= h) {
+            tArr[i++] = arr[l2++];
+        }
+        i = 0;
+        while (l <= h) {
+            arr[l++] = tArr[i++];
+        }
     }
 
     public static void main(String[] args) {
         int[] orgArr = {15, 54, 73, 2, 32, 54, 31, 0, -4, -7, -93};
         int[] arr = Arrays.copyOf(orgArr, orgArr.length);
-        print(arr);
+        System.out.println(Arrays.toString(arr));
 //        selectionSort(arr);
 //        bubbleSort(arr);
 //        bubbleSortRecursive(arr, arr.length);
 //        insertionSort(arr);
-        insertionSortRecursive(arr, 1);
-        print(arr);
+//        insertionSortRecursive(arr, 1);
+        mergeSort(arr, 0, arr.length - 1);
+        System.out.println(Arrays.toString(orgArr));
         Arrays.sort(orgArr);
         System.out.println("Is sorted: " + Arrays.equals(orgArr, arr));
 
