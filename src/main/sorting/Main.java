@@ -92,7 +92,7 @@ public class Main {
     }
 
     /**
-     * Time Complexity: O(n * Log n)
+     * Time Complexity: O(n Log n)
      * Space Complexity: O(n)
      */
     public static void mergeSort(int[] arr, int l, int h) {
@@ -102,6 +102,37 @@ public class Main {
         mergeSort(arr, l, m);
         mergeSort(arr, m + 1, h);
         merge(arr, l, m, h);
+    }
+
+    /**
+     * Time Complexity: O(n Log n)
+     * Space Complexity:O(n) (Considering method stack space)
+     */
+    public static void quickSort(int[] arr, int l, int h) {
+        if (l >= h) return;
+
+        int i = l + 1;
+        int j = h;
+
+        while (i < j) {
+            while (arr[i] < arr[l] && i < j) {
+                i++;
+            }
+            while (arr[j] >= arr[l] && i <= j) {
+                j--;
+            }
+
+            if (i < j) {
+                int t = arr[i];
+                arr[i] = arr[j];
+                arr[j] = t;
+            }
+        }
+        int t = arr[l];
+        arr[l] = arr[j];
+        arr[j] = t;
+        quickSort(arr, l, j - 1);
+        quickSort(arr, j + 1, h);
     }
 
     public static void merge(int[] arr, int l, int m, int h) {
@@ -139,7 +170,8 @@ public class Main {
 //        bubbleSortRecursive(arr, arr.length);
 //        insertionSort(arr);
 //        insertionSortRecursive(arr, 1);
-        mergeSort(arr, 0, arr.length - 1);
+//        mergeSort(arr, 0, arr.length - 1);
+        quickSort(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(orgArr));
         Arrays.sort(orgArr);
         System.out.println("Is sorted: " + Arrays.equals(orgArr, arr));
